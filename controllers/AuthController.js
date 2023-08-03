@@ -99,7 +99,8 @@ exports.login = async(req, res) => {
             });
             return;
         }
-        // return response
+        // return response and session loggedin
+        req.session.isLoggedIn = true;
         res.redirect("/");
         return;
 
