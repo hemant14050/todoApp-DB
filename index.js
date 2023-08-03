@@ -5,6 +5,7 @@ const todoRoutes = require("./routes/todoRoutes");
 const db = require("./config/database");
 const session = require("express-session");
 
+app.use(express.static("uploads"));
 app.use(session({
     secret: 'keyboard cat',
     resave: false,

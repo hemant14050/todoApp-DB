@@ -4,9 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo | Home</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+        .todo-container {
+            display: flex;
+            gap: 40px;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
     <%- include("../partials/header.ejs"); %>
-    <h1>This is HOME PAGE</h1>
+    <div class="todo-container">
+        <div>
+            <%- include("../partials/todo.ejs"); %>
+        </div>
+        <%- include("../partials/inputForm.ejs"); %>
+    </div>
 </body>
 </html>

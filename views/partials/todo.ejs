@@ -1,0 +1,136 @@
+<style>
+    table {
+        border-collapse: collapse;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+        width: 500px;
+        max-width: 100%;
+        margin-left: 10px;
+    }
+
+    td {
+        padding: 5px;
+        text-align: center;
+        vertical-align: middle;
+        border-bottom: 1px solid black;
+    }
+
+    .title {
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .image {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .checkbox {
+        width: 30px;
+        height: 30px;
+    }
+
+    .delete-button {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        font-size: 20px;
+        color: red;
+    }
+    input[type="checkbox"] {
+        cursor: pointer;
+        width: 100%;
+        height: 100%;
+    }
+</style>
+
+<table id="todoTable">
+</table>
+
+<script>
+    const todoTableNode = document.getElementById("todoTable");
+
+    fetchAndUpdateUI();
+    function fetchAndUpdateUI() {
+        fetch("/getAllTodo")
+        .then(res => res.json())
+        .then((data) => {
+            if(data.success) {
+                updateUI(data.todoData);
+            }
+        })
+        .catch((err) => {
+            console.log("An error occured!");
+        })
+    }
+
+    function updateUI(todoData) {
+        todoTableNode.innerHTML = "";
+        todoData.forEach(todo => {
+            const trNode = document.createElement("tr");
+            trNode.innerHTML = `
+                <td class="checkbox"><input type="checkbox" id="checkbox-${todo.createdAt}" ${todo.completed? "checked":""}></td>
+                <td class="title">${todo.title}</td>
+                <td><img class="image" src="${todo.imageUrl}"></td>
+                <td><button class="delete-button" id="deleteBtn-${todo.createdAt}">&times;</button></td>
+            `;
+            todoTableNode.appendChild(trNode);
+        });
+        addEventsOnUI(todoData);
+    }
+
+    function addEventsOnUI(todoData) {
+        todoData.forEach((todo) => {
+            const checkNode = document.getElementById(`checkbox-${todo.createdAt}`);
+            checkNode.addEventListener("change", (e) => {
+                updateTodoStatus(todo.createdAt);
+            });
+
+            const deleteBtnNode = document.getElementById(`deleteBtn-${todo.createdAt}`);
+            deleteBtnNode.addEventListener("click", (e) => {
+                deleteTodo(todo.createdAt);
+            });
+        })
+    }
+
+    function updateTodoStatus(id) {
+        fetch(`/updateTodo/${id}`, {
+            method: "PATCH"
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            // console.log(data);
+            if(data.success) {
+                console.log("Data updated!");
+            } else {
+                console.log("Data not updated!");
+            }
+        })
+        .catch((err) => {
+            alert(err.message);
+        })
+    };
+
+    function deleteTodo(id) {
+        fetch(`/deleteTodo/${id}`, {
+            method: "DELETE"
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            // console.log(data);
+            if(data.success) {
+                fetchAndUpdateUI();
+                console.log("Data deteled!");
+            } else {
+                console.log("Data not deleted!");
+            }
+        })
+        .catch((err) => {
+            alert(err.message);
+        })
+    };
+</script>
