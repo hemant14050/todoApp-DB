@@ -4,7 +4,11 @@ exports.home = async(req, res) => {
             res.redirect("/login");
             return;
         }
-        res.render("pages/home", {data: null});
+        res.render("pages/home", {
+            data: {
+                userName: req.session.userName
+            }
+        });
         return;
 
     } catch(err) {

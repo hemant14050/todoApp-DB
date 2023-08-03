@@ -101,6 +101,7 @@ exports.login = async(req, res) => {
         }
         // return response and session loggedin
         req.session.isLoggedIn = true;
+        req.session.userName = user.userName;
         res.redirect("/");
         return;
 
