@@ -1,10 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const {signUp, login} = require("../controllers/AuthController");
+const {home} = require("../controllers/HomeController");
 
 router.get("/test", (req, res) => {
     res.send("Welcome to TEst!");
 });
+
+router.get("/", home);
 
 router.get("/signUp", (req, res) => {
     res.render("pages/signUp", {error: null});

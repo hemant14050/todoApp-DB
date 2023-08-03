@@ -100,7 +100,8 @@ exports.login = async(req, res) => {
             return;
         }
         // return response
-        res.render("pages/home", {data: null});
+        res.redirect("/");
+        return;
 
     } catch(err) {
         console.log("Error in login: ", err);
