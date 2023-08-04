@@ -37,5 +37,9 @@ router.delete("/deleteTodo/:id", deleteTodo);
 
 router.post("/signUp", signUp);
 router.post("/login", login);
+router.get("/logout", (req, res) => {
+    req.session.destroy();
+    res.redirect("/");
+});
 
 module.exports = router;
