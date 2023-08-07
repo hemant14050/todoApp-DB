@@ -23,7 +23,7 @@ exports.addTodo = async(req, res) => {
 exports.getAllTodo = async(req, res) => {
     try {
         const todoData = await Todo.find({});
-        console.log(todoData);
+        // console.log(todoData);
         res.status(200).json({
             success: true,
             todoData: todoData,
@@ -43,9 +43,16 @@ exports.getAllTodo = async(req, res) => {
 exports.updateTodo = async(req, res) => {
     try {
         const {id} = req.params;
-        console.log(id);
+        console.log("To update: ",id);
         const todoData = await Todo.findOne({createdAt: id});
         const updated = await Todo.findOneAndUpdate({createdAt: id}, {completed: !todoData.completed});
+        if(!updated) {
+            res.status(404).json({
+                success: false,
+                message: "Todo not found"
+            });
+            return;
+        }
         res.status(200).json({
             success: true,
             message: "success"
@@ -63,15 +70,22 @@ exports.updateTodo = async(req, res) => {
 exports.deleteTodo = async(req, res) => {
     try {
         const {id} = req.params;
-        console.log(id);
+        console.log("To delete: ", id);
         const updated = await Todo.findOneAndDelete({createdAt: id});
+        if(!updated) {
+            res.status(404).json({
+                success: false,
+                message: "Todo not found"
+            });
+            return;
+        }
         res.status(200).json({
             success: true,
             message: "success"
         });
 
     } catch(err) {
-        console.log("Error while updating todo: ", err);
+        console.log("Error while deleting todo: ", err);
         res.status(500).json({
             success: false,
             message: "Internal Server Error",

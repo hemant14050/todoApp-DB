@@ -3,7 +3,7 @@ const User = require("../models/User");
 exports.signUp = async(req, res) => {
     try {
         // get data from req.body
-        console.log("body: ", req.body);
+        // console.log("body: ", req.body);
         const {userName, email, password, confirmPassword} = req.body;
         // console.log(userName, email, password, confirmPassword);
         if(!userName || !email || !password || !confirmPassword) {
@@ -45,7 +45,7 @@ exports.signUp = async(req, res) => {
             email,
             password
         });
-        console.log("NewUser: ", newUser);
+        // console.log("NewUser: ", newUser);
 
         // return response
         res.render("pages/login", {error: null});
