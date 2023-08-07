@@ -4,10 +4,15 @@
         background-color: #fff;
         border-radius: 5px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-        padding: 20px;
+        margin-left: 0 10px;
+        width: 100%;
+    }
+
+    .todo-items {
+        margin-top: 20px;
+        padding: 0 10px;
         width: 500px;
         max-width: 100%;
-        margin-left: 10px;
     }
 
     td {
@@ -48,8 +53,10 @@
     }
 </style>
 
-<table id="todoTable">
-</table>
+<div class="todo-items">
+    <table id="todoTable">
+    </table>
+</div>
 
 <script>
     const todoTableNode = document.getElementById("todoTable");

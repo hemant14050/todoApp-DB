@@ -20,6 +20,14 @@
             gap: 40px;
             margin-top: 20px;
         }
+
+        @media screen and (max-width: 768px) {
+            .todo-container {
+                flex-direction: column;
+                flex-direction: column-reverse;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -28,7 +36,9 @@
         <div>
             <%- include("../partials/todo.ejs"); %>
         </div>
-        <%- include("../partials/inputForm.ejs"); %>
+        <div>
+            <%- include("../partials/inputForm.ejs"); %>
+        </div>
     </div>
 </body>
 </html>

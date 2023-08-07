@@ -3,12 +3,12 @@
     form {
         display: flex;
         flex-direction: column;
-        align-items: center;
+        padding: 0 10px;
+        width: 500px;
+        max-width: 100%;
     }
     
     .form-group {
-        width: 100%;
-        max-width: 500px;
         margin-bottom: 1rem;
     }
     
@@ -61,11 +61,11 @@
 <form action="/addTodo" method="post" enctype="multipart/form-data">
     <div class="form-group">
         <label for="todoTitle">Todo Title:</label>
-        <input type="text" class="form-control" name="todoTitle" id="todoTitle" placeholder="Enter todo title">
+        <input type="text" class="form-control" name="todoTitle" id="todoTitle" placeholder="Enter todo title" required>
     </div>
     <div class="form-group">
         <label for="todoImage">Todo Image:</label>
-        <input type="file" class="form-control-file" name="todoImage" id="todoImage">
+        <input type="file" class="form-control-file" name="todoImage" id="todoImage" required>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
