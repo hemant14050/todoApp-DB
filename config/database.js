@@ -1,5 +1,5 @@
 const mongoose = require("mongoose")
-const MONGODB_URL = "mongodb+srv://patilhemant14050:JDXZMFnvtFdo72Gq@cluster0.id3gxpy.mongodb.net/todoApp"
+const MONGODB_URL = "mongodb+srv://<>@cluster0.id3gxpy.mongodb.net/todoApp"
 
 exports.connectDB = () => {
     mongoose.connect(MONGODB_URL)
